@@ -1,4 +1,4 @@
-   const fetchButton = document.getElementById('fetch-button');
+  const fetchButton = document.getElementById('fetch-button');
         const clickCount = document.getElementById('click-count');
         const resultsDiv = document.getElementById('results');
 
@@ -7,13 +7,13 @@
         let timerId;
 
         fetchButton.addEventListener('click', () => {
-            apiCallCount++;
-
             const currentTime = Date.now();
             if (currentTime - lastApiCallTime >= 1000) {
-                apiCallCount = 1;
+                apiCallCount = 0;
                 lastApiCallTime = currentTime;
             }
+
+            apiCallCount++;
 
             if (apiCallCount > 5) {
                 alert('Too many API calls. Please wait and try again.');
@@ -23,7 +23,7 @@
             lastApiCallTime = currentTime;
 
             clickCount.textContent = apiCallCount;
-            
+
             fetchData()
                 .then(data => {
                     resultsDiv.textContent = JSON.stringify(data);
